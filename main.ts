@@ -19,6 +19,12 @@ input.onButtonPressed(Button.B, function () {
 })
 input.onGesture(Gesture.Shake, function () {
     OLED.writeStringNewLine("Game on")
+    number_of_rounds_played = 0
+    number_of_ties = 0
+    Player_1_score = 0
+    player_2_score = 0
+    basic.pause(2000)
+    update_score_board()
 })
 let player_2_score = 0
 let Player_1_score = 0
