@@ -10,14 +10,21 @@ function update_score_board () {
 }
 input.onButtonPressed(Button.A, function () {
     Player_1_score += 1
+    update_score_board()
 })
 input.onButtonPressed(Button.AB, function () {
     number_of_ties += 1
+    update_score_board()
 })
 input.onButtonPressed(Button.B, function () {
     player_2_score += 1
+    update_score_board()
 })
 input.onGesture(Gesture.Shake, function () {
+    Reset()
+})
+function Reset () {
+    OLED.init(128, 64)
     OLED.writeStringNewLine("Game on")
     number_of_rounds_played = 0
     number_of_ties = 0
@@ -25,16 +32,9 @@ input.onGesture(Gesture.Shake, function () {
     player_2_score = 0
     basic.pause(2000)
     update_score_board()
-})
+}
+let number_of_rounds_played = 0
+let number_of_ties = 0
 let player_2_score = 0
 let Player_1_score = 0
-let number_of_ties = 0
-let number_of_rounds_played = 0
-OLED.init(128, 64)
-OLED.writeStringNewLine("Game on")
-number_of_rounds_played = 0
-number_of_ties = 0
-Player_1_score = 0
-player_2_score = 0
-basic.pause(2000)
-update_score_board()
+Reset()
