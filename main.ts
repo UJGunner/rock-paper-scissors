@@ -10,14 +10,35 @@ function update_score_board () {
 }
 input.onButtonPressed(Button.A, function () {
     Player_1_score += 1
+    basic.showLeds(`
+        . # # # .
+        # . . . #
+        # # # # #
+        # . . . #
+        # . . . #
+        `)
     update_score_board()
 })
 input.onButtonPressed(Button.AB, function () {
     number_of_ties += 1
+    basic.showLeds(`
+        # # # # #
+        . . # . .
+        . . # . .
+        . . # . .
+        . . # . .
+        `)
     update_score_board()
 })
 input.onButtonPressed(Button.B, function () {
     player_2_score += 1
+    basic.showLeds(`
+        # # # . .
+        # . . # .
+        # # # . .
+        # . . # .
+        # # # . .
+        `)
     update_score_board()
 })
 input.onGesture(Gesture.Shake, function () {
@@ -38,3 +59,17 @@ let number_of_ties = 0
 let player_2_score = 0
 let Player_1_score = 0
 Reset()
+basic.forever(function () {
+    if (10 <= number_of_rounds_played) {
+        if (player_2_score < Player_1_score) {
+            OLED.clear()
+            OLED.writeStringNewLine("player 1 wins")
+        } else if (Player_1_score < player_2_score) {
+            OLED.clear()
+            OLED.writeStringNewLine("player 2 wins")
+        } else {
+            OLED.clear()
+            OLED.writeStringNewLine("Tie. Try again.")
+        }
+    }
+})
